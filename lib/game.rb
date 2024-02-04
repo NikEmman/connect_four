@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'player'
-class C4
-  attr_reader :p1
+class Game
+  attr_accessor :p1
 
   def initialize
     @p1 = nil
@@ -12,11 +12,13 @@ class C4
 
   def create_p1
     puts 'What is Player 1 name?'
-    @p1 = Player.new(gets.chomp, "\u{1F534}")
+    @p1 = Player.new
+    @p1.ask_name
   end
 
   def create_p2
     puts 'What is Player 2 name?'
-    @p2 = Player.new(gets.chomp, "\u{1F7E1}")
+    @p2 = Player.new
+    @p2.ask_name
   end
 end

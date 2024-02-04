@@ -7,4 +7,8 @@ class Player
     @name = name
     @token = token
   end
+
+  def ask_name
+    @name = gets.chomp
+  end
 end
