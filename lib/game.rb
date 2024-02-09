@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 require_relative 'player'
+require_relative 'board'
+require_relative 'speech'
 class Game
-  attr_accessor :p1
+  attr_accessor :p1, :p2
 
   def initialize
     @p1 = nil
@@ -11,13 +13,13 @@ class Game
   end
 
   def create_p1
-    puts 'What is Player 1 name?'
+    Speech.new.create_p1
     @p1 = Player.new
     @p1.ask_name
   end
 
   def create_p2
-    puts 'What is Player 2 name?'
+    Speech.new.create_p2
     @p2 = Player.new
     @p2.ask_name
   end

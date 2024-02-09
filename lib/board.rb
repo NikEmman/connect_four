@@ -1,3 +1,4 @@
+# rubocop:disable Style/For
 # rubocop:disable Metrics/AbcSize
 # frozen_string_literal: true
 
@@ -58,9 +59,15 @@ class Board
   end
 
   def valid?(column)
-    true if (1..7).includes?(column) && @board.each_index
+    true if (1..7).include?(column) && column_not_full?(column)
   end
 
-  def column_not_full?(column); end
+  def column_not_full?(column)
+    for i in (0..5)
+      return true if @board[(column + 7 * i) - 1] == ' '
+    end
+    false
+  end
 end
 # rubocop:enable Metrics/AbcSize
+# rubocop:enable Style/For

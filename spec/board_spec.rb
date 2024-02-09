@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 # frozen_string_literal: true
 
 require_relative '../lib/board'
@@ -22,12 +23,33 @@ describe Board do
   describe '#valid?' do
     subject(:board_valid) { described_class.new }
 
-    it 'Returns true if column has available spots' do
-      expect(board_valid.valid?(column)).to be_truthy
+    it 'returns true if column has available spots' do
+      expect(board_valid.valid?(2)).to be_truthy
     end
-    it 'Returns false if column is full' do
+  end
+
+  describe 'column_not_full?' do
+    subject(:board_column) { described_class.new }
+    it 'returns true if column  has all empty spots' do
+      expect(board_column.column_not_full?(2)).to be_truthy
     end
-    it "Returns false if column doesn't exist" do
+
+    it 'returns true if column  has  empty spots' do
+      board_column.update(2, 'A')
+
+      expect(board_column.column_not_full?(2)).to be_truthy
+    end
+
+    it 'returns false if column is full' do
+      board_column.update(2, 'A')
+      board_column.update(2, 'A')
+      board_column.update(2, 'A')
+      board_column.update(2, 'A')
+      board_column.update(2, 'A')
+      board_column.update(2, 'A')
+
+      expect(board_column.column_not_full?(2)).to be_falsey
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
