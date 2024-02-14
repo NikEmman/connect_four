@@ -7,27 +7,27 @@ class Speech
   HELP = 'This is the help text'
   WRONG_INPUT = 'Wrong input, please choose a number between 1 and 7'
 
-  def welcome
+  def self.welcome
     puts WELCOME
   end
 
-  def create_p1
+  def self.create_p1
     puts CREATE_P1
   end
 
-  def create_p2
+  def self.create_p2
     puts CREATE_P2
   end
 
-  def ask_input(name)
+  def self.ask_input(name)
     puts "#{name} what is your next move?"
   end
 
-  def help
+  def self.help
     puts HELP
   end
 
-  def wrong_input
+  def self.wrong_input
     puts WRONG_INPUT
   end
 end

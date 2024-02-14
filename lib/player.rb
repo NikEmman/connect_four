@@ -19,7 +19,7 @@ class Player
       temp = gets.chomp
       break if (1..7).include?(temp.to_i)
 
-      Speech.new.wrong_input
+      Speech.wrong_input
     end
     temp.to_i
   end

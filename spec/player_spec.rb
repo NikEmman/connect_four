@@ -16,17 +16,23 @@ describe Player do
 
   describe '#input' do
     subject(:p1_input) { described_class.new }
-    it 'returns the number if between 1-7' do
+    let(:speech) { double('Speech') }
+
+    it 'accepts input in the range of 1-7' do
       allow(p1_input).to receive(:gets).and_return('2')
       expect(p1_input.input).to eq(2)
     end
 
-    it ' returns error once when it gets wrong input once' do
-      allow(p1_input).to receive(:gets).and_return('9', '2')
-      error = double('speech')
-      allow(error).to receive(:wrong_input).and_return('Error')
-      expect(p1_input).to receive(error).once
-      # not working
+    it 'prompts for input again if number is out of range' do
+      allow(p1_input).to receive(:gets).and_return('9', '0', '2')
+      expect(p1_input.input).to eq(2)
+    end
+
+    it 'receives the error msg once per wrong input' do
+      allow(p1_input).to receive(:gets).and_return('9', '0', '2')
+      expect(speech).to receive(:wrong_input).twice
+      p1_input.input
+      # still not working
     end
   end
 end
