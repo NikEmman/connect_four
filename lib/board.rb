@@ -1,23 +1,10 @@
+# rubocop:disable Metrics/MethodLength
 # rubocop:disable Style/For
 # rubocop:disable Metrics/AbcSize
 # frozen_string_literal: true
 
 # token representation red_token = "\u{1F534}", yellow_token = "\u{1F7E1}"
 
-# board = [
-#     [" ", " ", " ", " ", " ", " ", " "],
-#     ["🟡", " ", " ", " ", " ", " ", " "],
-#     ["🔴", " ", " ", " ", " ", " ", " "],
-#     ["🟡", " ", " ", " ", " ", " ", " "],
-#     ["🔴", " ", " ", " ", " ", " ", " "],
-#     ["🟡", " ", " ", " ", " ", " ", " "]
-#   ]
-
-#   board.each do |row|
-#     puts row.join(" | ")
-#   end
-
-#   puts "  1   2   3   4   5   6   7"
 class Board
   attr_accessor :board
 
@@ -32,10 +19,10 @@ class Board
     @board = board
   end
 
-  def display # rubocop:disable Metrics/MethodLength
-    puts "| #{board[36]} | #{board[37]} | #{board[38]} | #{board[39]} | #{board[40]} | #{board[41]} | #{board[42]}  |"
+  def display
+    puts "| #{board[35]} | #{board[36]} | #{board[37]} | #{board[38]} | #{board[39]} | #{board[40]} | #{board[41]} |"
     puts '|----+----+----+----+----+----+----|'
-    puts "| #{board[28]} | #{board[29]} | #{board[30]} | #{board[31]} | #{board[32]} | #{board[33]} | #{board[35]} |"
+    puts "| #{board[28]} | #{board[29]} | #{board[30]} | #{board[31]} | #{board[32]} | #{board[33]} | #{board[34]} |"
     puts '|----+----+----+----+----+----+----|'
     puts "| #{board[21]} | #{board[22]} | #{board[23]} | #{board[24]} | #{board[25]} | #{board[26]} | #{board[27]} |"
     puts '|----+----+----+----+----+----+----|'
@@ -45,7 +32,15 @@ class Board
     puts '|----+----+----+----+----+----+----|'
     puts "| #{board[0]} | #{board[1]} | #{board[2]} | #{board[3]} | #{board[4]} | #{board[5]} | #{board[6]} |"
     puts '|----+----+----+----+----+----+----|'
-    puts '|  1 |  2 |  3 |  4 |  5 |  6 | 7 |'
+    puts '|  1 |  2 |  3 |  4 |  5 |  6 |  7 |'
+  end
+
+  def redisplay
+    (0..5).reverse_each do |row|
+      puts "| #{@board[row * 7, 7].join(' | ')} |"
+      puts '|----+----+----+----+----+----+----|' unless row.zero?
+    end
+    puts '|  1 |  2 |  3 |  4 |  5 |  6 |  7 |'
   end
 
   def update(column, token)
@@ -57,17 +52,7 @@ class Board
 
     end
   end
-
-  def valid?(column)
-    true if (1..7).include?(column) && column_not_full?(column)
-  end
-
-  def column_not_full?(column)
-    for i in (0..5)
-      return true if @board[(column + 7 * i) - 1] == '  '
-    end
-    false
-  end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Style/For
+# rubocop:enable Metrics/MethodLength

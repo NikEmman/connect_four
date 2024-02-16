@@ -5,7 +5,7 @@ class Speech
   CREATE_P1 = 'Hello Player 1, what is your name?'
   CREATE_P2 = 'Hello Player 2, what is your name?'
   HELP = 'This is the help text'
-  WRONG_INPUT = 'Wrong input, please choose a number between 1 and 7'
+  WRONG_INPUT = 'Wrong input or column is full, please choose a number between 1 and 7'
 
   def self.welcome
     puts WELCOME

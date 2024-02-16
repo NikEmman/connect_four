@@ -3,6 +3,7 @@
 require_relative 'player'
 require_relative 'board'
 require_relative 'speech'
+require 'io/console'
 class Game
   attr_accessor :p1, :p2
 
@@ -39,10 +40,11 @@ class Game
     loop do
       # here is basic game loop
       Speech.ask_input(current_player.name)
-      column = current_player.input
+      column = current_player.input(@board.board)
       token = current_player.token
       @board.update(column, token)
-      @board.display
+      $stdout.clear_screen
+      @board.redisplay
       # check for win/end
       @round += 1
     end
