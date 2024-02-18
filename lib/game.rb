@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize
 # frozen_string_literal: true
 
 require_relative 'player'
@@ -30,6 +31,9 @@ class Game
     @round.odd? ? @p1 : @p2
   end
 
+  # def latest_play(original_board, current_board)
+  # end
+
   def play # rubocop:disable Metrics/MethodLength
     Speech.welcome
     # help
@@ -42,11 +46,28 @@ class Game
       Speech.ask_input(current_player.name)
       column = current_player.input(@board.board)
       token = current_player.token
+      original_board = @board.board.dup
       @board.update(column, token)
       $stdout.clear_screen
-      @board.redisplay
-      # check for win/end
+      @board.display
+      break if win(original_board, @board.board) || @board.full?
+
       @round += 1
     end
   end
+
+  # def update(column, token)
+  #   original_board = @board.dup
+  #   for i in (0..5)
+  #     next unless @board[(column + 7 * i) - 1] == '  '
+
+  #     @board[(column + 7 * i) - 1] = token
+  #     break
+
+  #   end
+  #   original_board.each_with_index.find do |value, index|
+  #     value != @board[index]
+  #   end
+  # end
 end
+# rubocop:enable Metrics/AbcSize

@@ -36,6 +36,7 @@ class Board
   end
 
   def update(column, token)
+    original_board = @board.dup
     for i in (0..5)
       next unless @board[(column + 7 * i) - 1] == '  '
 
@@ -43,6 +44,13 @@ class Board
       break
 
     end
+    original_board.each_with_index.find do |value, index|
+      value != @board[index]
+    end
+  end
+
+  def full?
+    @board.none? { |element| element == '  ' }
   end
 end
 # rubocop:enable Metrics/AbcSize
