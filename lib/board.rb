@@ -35,14 +35,6 @@ class Board
     puts '|  1 |  2 |  3 |  4 |  5 |  6 |  7 |'
   end
 
-  def redisplay
-    (0..5).reverse_each do |row|
-      puts "| #{@board[row * 7, 7].join(' | ')} |"
-      puts '|----+----+----+----+----+----+----|' unless row.zero?
-    end
-    puts '|  1 |  2 |  3 |  4 |  5 |  6 |  7 |'
-  end
-
   def update(column, token)
     for i in (0..5)
       next unless @board[(column + 7 * i) - 1] == '  '
