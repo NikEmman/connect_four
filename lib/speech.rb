@@ -6,6 +6,8 @@ class Speech
   CREATE_P2 = 'Hello Player 2, what is your name?'
   HELP = 'This is the help text'
   WRONG_INPUT = 'Wrong input or column is full, please choose a number between 1 and 7'
+  RESTART = 'Do you want to play again? [Y/N]'
+  FULL_BOARD = 'You are both amazing players, board is full, game is over!'
 
   def self.welcome
     puts WELCOME
@@ -29,5 +31,17 @@ class Speech
 
   def self.wrong_input
     puts WRONG_INPUT
+  end
+
+  def self.restart
+    puts RESTART
+  end
+
+  def self.full_board
+    puts FULL_BOARD
+  end
+
+  def self.congrats(name)
+    puts " Congratulations #{name}, you won!!! "
   end
 end

@@ -41,5 +41,143 @@ describe Game do
       end
     end
   end
+
+  describe '#vertical_win?' do
+    context 'When a 4-piece streak has been made' do
+      let(:game_vertical) { described_class.new }
+      let(:board) do
+        instance_double('Board', board: [
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  '
+                        ])
+      end
+      before do
+        game_vertical.instance_variable_set(:@board, board)
+      end
+
+      it 'returns true for vertical streak' do
+        token = 'A'
+        expect(game_vertical.vertical_win?(token)).to be_truthy
+      end
+    end
+
+    context 'When a 4-piece streak has not been made' do
+      let(:game_vertical) { described_class.new }
+      let(:board) do
+        instance_double('Board', board: [
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  '
+                        ])
+      end
+      before do
+        game_vertical.instance_variable_set(:@board, board)
+      end
+
+      it 'returns true for vertical streak' do
+        token = 'A'
+        expect(game_vertical.vertical_win?(token)).to be_falsey
+      end
+    end
+  end
+
+  describe '#horizontal_win?' do
+    context 'When a 4-piece streak has been made' do
+      let(:game_horizontal) { described_class.new }
+      let(:board) do
+        instance_double('Board', board: [
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', 'A', 'A', 'A', 'A', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  '
+                        ])
+      end
+      before do
+        game_horizontal.instance_variable_set(:@board, board)
+      end
+
+      it 'returns true for horizontal streak' do
+        token = 'A'
+        expect(game_horizontal.horizontal_win?(token)).to be_truthy
+      end
+    end
+
+    context 'When a 4-piece streak has not been made' do
+      let(:game_horizontal) { described_class.new }
+      let(:board) do
+        instance_double('Board', board: [
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', 'A', 'A', 'A', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  '
+                        ])
+      end
+      before do
+        game_horizontal.instance_variable_set(:@board, board)
+      end
+
+      it 'returns true for horizontal streak' do
+        token = 'A'
+        expect(game_horizontal.horizontal_win?(token)).to be_falsey
+      end
+    end
+  end
+
+  describe '#diagonal_win?' do
+    context 'When a 4-piece streak has been made' do
+      let(:game_diagonal) { described_class.new }
+      let(:board) do
+        instance_double('Board', board: [
+                          'A', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', 'A', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', 'A', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  '
+                        ])
+      end
+      before do
+        game_diagonal.instance_variable_set(:@board, board)
+      end
+
+      it 'returns true for diagonal streak' do
+        token = 'A'
+        expect(game_diagonal.diagonal_win?(token)).to be_truthy
+      end
+    end
+
+    context 'When a 4-piece streak has not been made' do
+      let(:game_diagonal) { described_class.new }
+      let(:board) do
+        instance_double('Board', board: [
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', 'A', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', 'A', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', 'A', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  ',
+                          '  ', '  ', '  ', '  ', '  ', '  ', '  '
+                        ])
+      end
+      before do
+        game_diagonal.instance_variable_set(:@board, board)
+      end
+
+      it 'returns true for diagonal streak' do
+        token = 'A'
+        expect(game_diagonal.diagonal_win?(token)).to be_falsey
+      end
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
