@@ -3,8 +3,6 @@
 # rubocop:disable Metrics/AbcSize
 # frozen_string_literal: true
 
-# token representation red_token = "\u{1F534}", yellow_token = "\u{1F7E1}"
-
 class Board
   attr_accessor :board
 
